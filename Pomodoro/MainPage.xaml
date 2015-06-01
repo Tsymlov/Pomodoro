@@ -8,8 +8,9 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="timeBoard" HorizontalAlignment="Center" TextWrapping="Wrap" Text="25:00" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI Light" FontSize="100"/>
-        <Button x:Name="StartStop" Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartStop_Click" Margin="0,200,0,0"/>
+        <TextBlock x:Name="timeBoard" HorizontalAlignment="Center" TextWrapping="Wrap" Text="25:00" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI Light" FontSize="100" Height="120" Width="250" TextAlignment="Center" Foreground="Red"/>
+        <Button x:Name="StartStop" Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartStop_Click" Margin="0,300,0,0"/>
+        <Ellipse Fill="Red" Height="20"  VerticalAlignment="Top" Width="20" Margin="0,250,0,0" RenderTransformOrigin="0.346,0.343" HorizontalAlignment="Center" Visibility="Collapsed"/>
 
     </Grid>
 </Page>

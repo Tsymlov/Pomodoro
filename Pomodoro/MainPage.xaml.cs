@@ -12,9 +12,16 @@ namespace Pomodoro
     public sealed partial class MainPage : Page
     {
 
-        DispatcherTimer timer = new DispatcherTimer();
+        DispatcherTimer timer;
         TimeSpan pomodoroTime;
         bool isClockTicking = false;
+        private bool isTimeUp
+        {
+            get
+            {
+                return pomodoroTime.Minutes <= 0 && pomodoroTime.Seconds <= 0;
+            }
+        }
 
         public MainPage()
         {
@@ -24,6 +31,7 @@ namespace Pomodoro
 
         private void InitializeTimer()
         {
+            timer = new DispatcherTimer();
             pomodoroTime = TimeSpan.FromMinutes(25);
             RefreshTimeBoard();
             timer.Tick += Timer_Tick;
@@ -32,25 +40,23 @@ namespace Pomodoro
 
         private void Timer_Tick(object sender, object e)
         {
+#if DEBUG
+            pomodoroTime = pomodoroTime.Subtract(TimeSpan.FromMinutes(1));
+#else
             pomodoroTime = pomodoroTime.Subtract(TimeSpan.FromSeconds(1));
+#endif
             RefreshTimeBoard();
             if (isTimeUp)
             {
+                //TODO: Play sound.
                 Stop();
+                InitializeTimer();
             }
         }
 
         private void RefreshTimeBoard()
         {
             timeBoard.Text = pomodoroTime.ToString(@"mm\:ss");
-        }
-
-        private bool isTimeUp
-        {
-            get
-            {
-                return pomodoroTime.Minutes <= 0 && pomodoroTime.Seconds <= 0;
-            }
         }
 
         private void Stop()
